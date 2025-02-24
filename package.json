@@ -1,6 +1,6 @@
 {
   "name": "quaqa-chat",
-  "displayName": "QuaQA-chat",
+  "displayName": "QuaQA",
   "description": "Generates Gherkin tests for code using CoPilot",
   "version": "0.0.1",
   "engines": {
@@ -10,15 +10,35 @@
     "Other"
   ],
   "activationEvents": [],
+  "extensionDependencies": [
+    "github.copilot-chat"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
+    "chatParticipants": [
+      {
+        "id": "quaqa-chat",
+        "name": "QuaQA",
+        "description": "Generates Gherkin tests for code using CoPilot"
+      }
+    ],
     "commands": [
       {
-        "command": "quaqa-chat.helloWorld",
-        "title": "Hello World"
+        "command": "quaqa-chat.processPythonFile",
+        "title": "Generate Gherkin tests"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "resourceLangId == python",
+          "command": "quaqa-chat.processPythonFile",
+          "group": "quaqa-chat"
+        }
+      ]
+    }
   },
+  "enabledApiProposals": ["contribEditorContentMenu"],
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "webpack",
