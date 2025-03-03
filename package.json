@@ -25,13 +25,13 @@
     "commands": [
       {
         "command": "quaqa-chat.processPythonFile",
-        "title": "Generate Gherkin tests"
+        "title": "Generate Gherkin"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "when": "resourceLangId == python",
+          "when": "resourceLangId",
           "command": "quaqa-chat.processPythonFile",
           "group": "quaqa-chat"
         }
