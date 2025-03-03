@@ -12,6 +12,8 @@ This extensions allows for the generation of Gherkin test cases using Vscode's G
 
 2. You can then access the Ghrkin test case in the `./features/` directory of your workspace.
 
+![](images/steps-2.png)
+
 ## Requirements
 
 If you have any requirements or dependencies, add a section describing those and how to install and configure them.
