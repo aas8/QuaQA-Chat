@@ -1,10 +1,8 @@
 # quaqa-chat README
 
-This is the README for your extension "quaqa-chat". After writing up a brief description, we recommend including the following sections.
+QuaQA is an extension that allos for the generation of Gherkin test cases using Vscode's Copilot extension.
 
 ## Features
-
-This extensions allows for the generation of Gherkin test cases using Vscode's Github CoPilot extension with only a few clicks.
 
 1. First, right-click the script containing the code you want to generate Gherkin test cases for and click the "Generate Ghrkin" option in the context menu:
 
@@ -16,7 +14,7 @@ This extensions allows for the generation of Gherkin test cases using Vscode's G
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- To use this extension you need to set up Copilot in your visual studio.
 
 ## Extension Settings
 

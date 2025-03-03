@@ -2,7 +2,10 @@
   "name": "quaqa-chat",
   "displayName": "QuaQA",
   "description": "Generates Gherkin tests for code using CoPilot",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aas8/QuaQA-Chat"},
   "engines": {
     "vscode": "^1.97.0"
   },
@@ -15,19 +18,6 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
-    "chatParticipants": [
-      {
-        "id": "quaqa-chat",
-        "name": "QuaQA",
-        "description": "Generates Gherkin tests for code using CoPilot"
-      }
-    ],
-    "commands": [
-      {
-        "command": "quaqa-chat.processPythonFile",
-        "title": "Generate Gherkin"
-      }
-    ],
     "menus": {
       "explorer/context": [
         {
