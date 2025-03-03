@@ -4,13 +4,13 @@ This is the README for your extension "quaqa-chat". After writing up a brief des
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+This extensions allows for the generation of Gherkin test cases using Vscode's Github CoPilot extension with only a few clicks.
 
-For example if there is an image subfolder under your extension project workspace:
+1. First, right-click the script containing the code you want to generate Gherkin test cases for and click the "Generate Ghrkin" option in the context menu:
 
-\!\[feature X\]\(images/feature-x.png\)
+![](images/steps-1.png)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+2. You can then access the Ghrkin test case in the `./features/` directory of your workspace.
 
 ## Requirements
 
