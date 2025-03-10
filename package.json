@@ -18,6 +18,12 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "quaqa-chat.processPythonFile",
+        "title": "Generate Gherkin"
+      }
+    ],
     "menus": {
       "explorer/context": [
         {
