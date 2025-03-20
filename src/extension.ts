@@ -95,8 +95,21 @@ It there is no test to be written, simply output a blank code block.`;
 				return;
 			}
 			fs.writeFileSync(featureScript, gherkinContent);
-			vscode.window.showInformationMessage(`Gherkin feature writen to "${featureScript}"`);
-	}
+
+			vscode.window
+				.showInformationMessage(
+					`Gherkin feature written to "${featureScript}"`,
+					"👍",
+					"👎",
+				)
+				.then((selection) => {
+					if (selection === "👍") {
+						console.log("User gave a thumbs up for the generated test.");
+					} else if (selection === "👎") {
+						console.log("User gave a thumbs down for the generated test.");
+					}
+				});
+		},
 	);
 
 	vscode.chat.createChatParticipant("quaqa-chat", (request, context, response, token) => {
