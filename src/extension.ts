@@ -3,14 +3,18 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
+import Mixpanel from 'mixpanel';
+import * as dotenv from 'dotenv';
+
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export async function activate(context: vscode.ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "quaqa-chat" is now active!');
+	dotenv.config({ path: context.asAbsolutePath('.env') });
+	const MIXPANEL_TOKEN = process.env.MIXPANEL_TOKEN;
+	const mixpanel = Mixpanel.init(MIXPANEL_TOKEN as string);
+	
 
 	const workspaceFolder = vscode.workspace.workspaceFolders?.[0].uri.fsPath;
 
@@ -95,8 +99,44 @@ It there is no test to be written, simply output a blank code block.`;
 				return;
 			}
 			fs.writeFileSync(featureScript, gherkinContent);
-			vscode.window.showInformationMessage(`Gherkin feature writen to "${featureScript}"`);
-	}
+			const document = await vscode.workspace.openTextDocument(featureScript);
+			vscode.window.showTextDocument(document);
+
+			vscode.window
+				.showInformationMessage(
+					`Was the generated Gherkin useful?"`,
+					"👍",
+					"👎",
+				)
+				.then((selection) => {
+					const eventProperties = {
+						// Raw content
+						user_script: file,  // Original user code
+						ai_generated_feature: gherkinContent,  // Full AI output
+						
+						// Contextual metadata
+						source_file: path.basename(uri.fsPath),
+						feature_file: path.basename(featureScript),
+						workspace: workspaceFolder,
+						language: language,
+						duplicate_count: n
+					};
+			
+					if (selection === "👍") {
+						mixpanel.track('thumbs_up', eventProperties);
+					} else if (selection === "👎") {
+						mixpanel.track('thumbs_down', eventProperties);
+					}
+
+					// Track the generation event itself
+					mixpanel.track('gherkin_generated', {
+						input: file,
+						output: gherkinContent,
+						prompt: BASE_PROMPT
+					});
+			
+				});
+		},
 	);
 
 	vscode.chat.createChatParticipant("quaqa-chat", (request, context, response, token) => {
